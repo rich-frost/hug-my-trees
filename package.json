@@ -1,0 +1,32 @@
+{
+  "name": "trees",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bigu": "git+https://github.com/kazlauskis/BIGU.git",
+    "leaflet-compass": "^1.5.5",
+    "leaflet.gridref": "git+https://github.com/rich-frost/Leaflet.GridRef.git",
+    "os-leaflet": "^1.0.0",
+    "sass": "^1.20.3"
+  },
+  "dependencies": {
+    "@mdi/font": "^3.6.95",
+    "config": "^2.0.1",
+    "fontawesome": "^4.7.2",
+    "fontello": "^0.5.0",
+    "gps": "^0.4.7",
+    "helpers": "0.0.6",
+    "jquery": "^3.4.1",
+    "leaflet": "^1.5.1",
+    "map": "^1.0.1",
+    "material-design-icons": "^3.0.1",
+    "mdi": "^2.2.43"
+  }
+}

@@ -1,0 +1,61 @@
+<html>
+<head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Hug my Trees</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+
+    <style type="text/css">
+
+        body, html, input {
+            font-size: 1em;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html, #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .search-bar {
+            position: absolute;
+            height: 3.5em;
+            width: 90%;
+            bottom: 0.5em;
+            left: 0.5em;
+            z-index: 1000;
+            background: #1698be;
+        }
+
+        .search-bar input {
+            height: 2em;
+            width: 60%;
+            margin-top: 0.5em;
+            margin-left: 0.5em;
+        }
+
+        .error {
+            color: red;
+        }
+
+        button {
+            background: #c4d5f3;
+            padding: 0.7em;
+            float: right;
+            font-size: 1em;
+            height: 2.5em;
+            margin: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-bar"><input id="search" placeholder="Search for a location" type="text" /><button id="search-button">Enter</button></div>
+
+    <div id="map"></div>
+
+    <script src="src/index.js"></script>
+</body>
+</html>
