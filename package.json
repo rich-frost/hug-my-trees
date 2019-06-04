@@ -11,12 +11,13 @@
   "license": "ISC",
   "devDependencies": {
     "bigu": "git+https://github.com/kazlauskis/BIGU.git",
-    "leaflet-compass": "^1.5.5",
+    "leaflet-compass": "git+https://github.com/stefanocudini/leaflet-compass.git#571a39d6541954db491fee2c20ec05ec382e2139",
     "leaflet.gridref": "git+https://github.com/rich-frost/Leaflet.GridRef.git",
     "os-leaflet": "^1.0.0",
     "sass": "^1.20.3"
   },
   "dependencies": {
+    "@ansur/leaflet-pulse-icon": "^0.1.1",
     "@mdi/font": "^3.6.95",
     "config": "^2.0.1",
     "fontawesome": "^4.7.2",

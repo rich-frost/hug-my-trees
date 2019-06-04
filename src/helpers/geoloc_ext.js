@@ -4,12 +4,12 @@
  * Sample geolocation events:
  * start, update, error, success, stop
  *****************************************************************************/
-import $ from 'jquery';
 import GPS from './GPS';
 import LocHelp from './location';
 import events from './events';
 import BIGU from 'bigu';
 
+window.locationEvents = events;
 const extension = {
     location: null,
 
@@ -33,8 +33,6 @@ const extension = {
 
                 if (error) {
                     events.publish('location:updated', location);
-                    //that.trigger('geolocation', location);
-                    //that.trigger('geolocation:error', location);
                     return;
                 }
 
@@ -42,30 +40,18 @@ const extension = {
                 location.updateTime = new Date(); // track when gps was acquired
                 location.gridref = LocHelp.locationToGrid(location);
 
-                // extend old location to preserve its previous attributes like name or id
-                // const oldLocation = that.get('location');
-                // location = $.extend(oldLocation, location);
-
                 if (that.setGPSLocation) {
                     if (that.setGPSLocation(location)) {
                         events.publish('location:updated', location);
-                        //that.trigger('change:location');
-                        //that.trigger('geolocation', location);
-                        //that.trigger('geolocation:success', location);
                     }
                     return;
                 }
 
                 events.publish('location:updated', location);
-                //that.trigger('change:location');
-                //that.trigger('geolocation', location);
-                //that.trigger('geolocation:success', location);
             }
         };
 
         this.locating = GPS.start(options);
-        //that.trigger('geolocation');
-        //that.trigger('geolocation:start');
     },
 
     stopGPS(options = {}) {

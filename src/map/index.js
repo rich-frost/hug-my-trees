@@ -28,23 +28,21 @@
 
 import $ from 'jquery';
 import icons from '@mdi/font/css/materialdesignicons.css';
-//import 'leaflet/dist/leaflet.css';
-//import 'leaflet-compass/src/leaflet-compass.css';
+import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/layers-2x.png';
 import 'leaflet/dist/images/layers.png';
 import L from 'leaflet';
 import CONFIG from '../config/config';
 import LocHelp from '../helpers/location';
 import 'os-leaflet';
-import BIGU from 'bigu';
 import 'leaflet.gridref';
-//import 'leaflet-compass';
-
+import BIGU from 'BIGU';
 import LeafletButton from './leaflet_button_ext';
 
 import mapMarker from './marker';
 import gpsFunctions from './gps';
 import search from './search';
+import recentLocations from './recent-locations';
 
 import events from '../helpers/events';
 
@@ -95,6 +93,9 @@ const API = {
 
         // Past locations
         //this.addPastLocations();
+
+        // Recent locations
+        this.initRecentLocations();
 
         // Marker
         this.addMapMarker();
@@ -175,10 +176,6 @@ const API = {
     },
 
     addPastLocations() {
-        if (this.options.hidePast) {
-            return;
-        }
-
         const that = this;
         const button = new LeafletButton({
             position: 'topright',
@@ -206,6 +203,8 @@ const API = {
         const location = this._getCurrentLocation();
 
         this.updateMapMarker(location);
+
+        this.createPolyline();
 
         this._repositionMap(location.source === 'map');
     },
@@ -304,7 +303,11 @@ const API = {
         } else {
             zoom = this.map.getZoom();
         }
-        this.map.setView(this._getCenter(location), zoom);
+        if (this.location && this.treeGrid) {
+            this.map.fitBounds(this._getBounds(location, this.treeGrid));
+        } else {
+            this.map.setView(this._getCenter(location), zoom);
+        }
     },
 
     _getCurrentLayer() {
@@ -331,17 +334,6 @@ const API = {
     },
 
     _getCurrentLocation() {
-        /*        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                currentLat = position.coords['latitude'];
-                currentLng = position.coords['longitude'];
-
-                createMap(currentLat, currentLng);
-            });
-        } else {
-            alert('No Geolocation found, defaulting to Plymouth as your current location');
-            createMap(50.3755, 4.1427);
-        }*/
         if (!this.location) {
             this.location = {
                 accuracy: 100,
@@ -349,7 +341,7 @@ const API = {
                 longitude: -4.1427
             };
         }
-        return this.location || {};
+        return this.location;
     },
 
     /**
@@ -390,6 +382,17 @@ const API = {
             center = [location.latitude, location.longitude];
         }
         return center;
+    },
+
+    _getBounds(location = {}, treeGrid = {}) {
+        let bounds = [];
+        if (location.latitude) {
+            bounds.push([location.latitude, location.longitude]);
+        }
+        if (treeGrid.latitude) {
+            bounds.push([treeGrid.latitude, treeGrid.longitude]);
+        }
+        return bounds;
     },
 
     /**
@@ -469,5 +472,6 @@ const API = {
 $.extend(API, search);
 $.extend(API, mapMarker);
 $.extend(API, gpsFunctions);
+$.extend(API, recentLocations);
 
 export default API;

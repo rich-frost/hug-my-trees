@@ -81,15 +81,12 @@ const API = {
         altitudeAccuracy: parseInt(position.coords.altitudeAccuracy, 10),
       };
 
-      if (location.accuracy <= accuracyLimit) {
-        callback && callback(null, location);
-      } else {
-        onUpdate && onUpdate(location);
-      }
+      onUpdate && onUpdate(location);
     };
 
     // Callback if geolocation fails
     const onError = (err = {}) => {
+      alert(err.message);
       callback && callback(new Error(err.message));
     };
 
