@@ -6,12 +6,9 @@ It allows you to add a different grid ref, and shows you a line between you and 
 
 Save the location using the star icon next to the search and it will save the location to local storage.
 
-Desktop View
+## Desktop View
 ![](desktop.png)
 
-
-Mobile View
-![](mobile.png)
 
 ## Installation
 
