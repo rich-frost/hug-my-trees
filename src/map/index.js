@@ -42,7 +42,7 @@ import LeafletButton from './leaflet_button_ext';
 import mapMarker from './marker';
 import gpsFunctions from './gps';
 import search from './search';
-import recentLocations from './recent-locations';
+import savedLocations from './saved-locations';
 
 import events from '../helpers/events';
 
@@ -91,11 +91,8 @@ const API = {
         // GPS
         this.addGPS();
 
-        // Past locations
-        //this.addPastLocations();
-
-        // Recent locations
-        this.initRecentLocations();
+        // Saved locations
+        this.initSavedLocations();
 
         // Marker
         this.addMapMarker();
@@ -171,30 +168,6 @@ const API = {
             {}
         );
         this.map.addControl(this.controls);
-
-        //this.map.addControl(new L.Control.Compass());
-    },
-
-    addPastLocations() {
-        const that = this;
-        const button = new LeafletButton({
-            position: 'topright',
-            className: 'past-btn',
-            title: 'navigate to past locations',
-            body: '<span class="icon icon-history"></span>',
-            onClick() {
-                that.trigger('past:click');
-            },
-            maxWidth: 30 // number
-        });
-
-        this.map.addControl(button);
-        const sample = this.model.get('sample');
-        if (sample.isGPSRunning()) {
-            this._set_gps_progress_feedback('pending');
-        } else {
-            this._set_gps_progress_feedback('');
-        }
     },
 
     onLocationChange(newLocation) {
@@ -472,6 +445,6 @@ const API = {
 $.extend(API, search);
 $.extend(API, mapMarker);
 $.extend(API, gpsFunctions);
-$.extend(API, recentLocations);
+$.extend(API, savedLocations);
 
 export default API;

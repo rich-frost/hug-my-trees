@@ -39,10 +39,11 @@ const search = {
                     var searchInput = document.getElementById('search');
                     if (empty || validGridRef || validLatLong) {
                         //Remove red class to input
-                        searchInput.classList.remove('error');
+                        searchInput.classList.remove('text-danger');
                     } else {
+                        console.log('text-danger');
                         //Add red class to input
-                        searchInput.classList.add('error');
+                        searchInput.classList.add('text-danger');
                     }
             }
         });
@@ -91,15 +92,8 @@ const search = {
     },
 
     saveLocation() {
-        this.saveLocationToRecents(this.currentSearch);
+        this.saveLocationToLS(this.currentSearch);
         document.getElementById('save-location-button').disabled = true;
-    },
-
-    saveLocationToRecents(search) {
-        let recentLocations = JSON.parse(window.localStorage.getItem('recentLocations')) || [];
-        recentLocations.unshift({ search, ...this.treeGrid });
-        recentLocations = recentLocations.slice(0, 5);
-        window.localStorage.setItem('recentLocations', JSON.stringify(recentLocations));
     },
 
     createPolyline() {

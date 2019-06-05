@@ -3,4 +3,3 @@ dist/
 *.pem
 .cache/
 .DS_Store
-src/config/config.js
