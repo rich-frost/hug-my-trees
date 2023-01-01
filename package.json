@@ -19,7 +19,7 @@
   "dependencies": {
     "@ansur/leaflet-pulse-icon": "^0.1.1",
     "@mdi/font": "^3.6.95",
-    "config": "^2.0.1",
+    "config": "^3.3.8",
     "fontawesome": "^4.7.2",
     "fontello": "^0.5.0",
     "gps": "^0.4.7",
